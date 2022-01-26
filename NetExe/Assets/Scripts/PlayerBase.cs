@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using SoftGear.Strix.Unity.Runtime; //Strixの利用に必要
 
-public class PlayerBase : StrixBehaviour
+public class PlayerBase : StrixBehaviour,IDamage
 {
     [SerializeField]
     int maxHP = 100;
@@ -14,15 +15,17 @@ public class PlayerBase : StrixBehaviour
     int posY = 0;   //現在のステージ上のY座標
 
     Vector2 input = Vector2.zero;  //スティックの入力
-    bool isNeutral = true; //ニュートラルに戻ったか確認用
-
+    bool isNeutralX = true; //ニュートラルに戻ったか確認用
+    bool isNeutralY = true;
+    public bool isDead = false;    //死亡フラグ
+    Text hpTxt;
     StageManager stageManager;  //ステージマネージャー
-    //PanelData[,] panelDatas;    
 
     // Start is called before the first frame update
     void Start()
     {
         stageManager = GameObject.FindGameObjectWithTag("Stage").GetComponent<StageManager>();
+        hpTxt = GetComponentInChildren<Text>();
         Invoke("Ready", 1f);
     }
 
@@ -30,15 +33,20 @@ public class PlayerBase : StrixBehaviour
     void Ready()
     {
         currentHP = maxHP;
+        hpTxt.text = currentHP.ToString();
         //初期位置を決定
         posY = 1;
         if (team == PanelData.TeamColor.Blue)
         {
             posX = 1;
+            hpTxt.canvas.transform.localRotation = Quaternion.Euler(0, -90, 0);
+            transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
         }
         else if(team == PanelData.TeamColor.Red)
         {
             posX = 4;
+            hpTxt.canvas.transform.localRotation = Quaternion.Euler(0, 90, 0);
+            transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
         }
         //ステージデータに自身の位置をセット
         stageManager.PanelDatas[posY, posX].onChara = gameObject;
@@ -73,6 +81,26 @@ public class PlayerBase : StrixBehaviour
         return true;
     }
 
+    public void Damage(int value)
+    {
+        currentHP -= value;
+        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+        hpTxt.text = currentHP.ToString();
+        if(currentHP <= 0)
+        {
+            isDead = true;
+        }
+    }
+
+    void Shot(int atk)
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position + transform.forward,transform.forward,out hit))
+        {
+            hit.collider.gameObject.GetComponent<IDamage>()?.Damage(atk);
+        }
+    }
+
     private void FixedUpdate()
     {
         if (!isLocal)
@@ -84,13 +112,16 @@ public class PlayerBase : StrixBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (!isLocal)
+        {
+            return;
+        }
         input.x = Input.GetAxis("Horizontal");
         input.y = Input.GetAxis("Vertical");
 
         if (Mathf.Abs(input.x) > 0.3f)
         {
-            if (isNeutral)
+            if (isNeutralX)
             {
                 if (input.x > 0)
                 {
@@ -102,12 +133,16 @@ public class PlayerBase : StrixBehaviour
                     //左に移動
                     Move(posX - 1, posY);
                 }
-                isNeutral = false;
+                isNeutralX = false;
             }
         }
-        else if (Mathf.Abs(input.y) > 0.3f)
+        else
         {
-            if (isNeutral)
+            isNeutralX = true;
+        }
+        if (Mathf.Abs(input.y) > 0.3f)
+        {
+            if (isNeutralY)
             {
                 if (input.y > 0)
                 {
@@ -119,12 +154,18 @@ public class PlayerBase : StrixBehaviour
                     //下に移動
                     Move(posX, posY + 1);
                 }
-                isNeutral = false;
+                isNeutralY = false;
             }
         }
         else
         {
-            isNeutral = true;
+            isNeutralY = true;
+        }
+
+        if(Input.GetButtonDown("Fire1"))
+        {
+            Debug.Log("shot");
+            Shot(5);
         }
     }
 }
