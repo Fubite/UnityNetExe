@@ -11,6 +11,7 @@ public class PlayerBase : StrixBehaviour,IDamage
     int currentHP = 0;
     [SerializeField]
     PanelData.TeamColor team;   //自身のチーム
+    public PanelData.TeamColor Team { get { return team; } }
     int posX = 0;   //現在のステージ上のX座標
     int posY = 0;   //現在のステージ上のY座標
 
