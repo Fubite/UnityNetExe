@@ -58,6 +58,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-UserSettings/EditorUserSettings.asset
-Library/ArtifactDB
-Library/SourceAssetDB
+/UserSettings/EditorUserSettings.asset
+/Library/ArtifactDB
+/Library/SourceAssetDB
