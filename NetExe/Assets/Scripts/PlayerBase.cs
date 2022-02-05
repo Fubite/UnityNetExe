@@ -25,7 +25,6 @@ public class PlayerBase : StrixBehaviour,IDamage
     bool isNeutralX = true; //ニュートラルに戻ったか確認用
     bool isNeutralY = true;
 
-    [StrixSyncField]
     public bool isMove = false;    //移動可否フラグ
     [StrixSyncField]
     public bool isDead = false;    //死亡フラグ

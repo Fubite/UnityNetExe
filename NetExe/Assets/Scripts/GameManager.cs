@@ -53,7 +53,7 @@ public class GameManager : StrixBehaviour
         Debug.Log("Start!");
         for (int i = 0; i < player.Length; ++i)
         {
-            player[i].RpcToAll("SetMove", true);
+            player[i].SetMove(true);
         }
     }
 
