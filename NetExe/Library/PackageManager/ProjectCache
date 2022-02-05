@@ -5,7 +5,11 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
+<<<<<<< HEAD
+      ticks: 637796436179167000
+=======
       ticks: 637796439995020409
+>>>>>>> a61d0c624351e769d3ca1328ea6e084230bae206
     m_Hash: 3329532473
   m_LockFileStatus:
     m_FilePath: C:/Users/ohasifu/Documents/GitHub/UnityNetExe/NetExe/Packages/packages-lock.json
@@ -13,7 +17,11 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
+<<<<<<< HEAD
+      ticks: 637796436184861780
+=======
       ticks: 637796440001064831
+>>>>>>> a61d0c624351e769d3ca1328ea6e084230bae206
     m_Hash: 3678947191
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
@@ -423,7 +431,11 @@ m_PackageAssets:
       isDirectDependency: 1
       version: 2.0.14
       source: 1
+<<<<<<< HEAD
+      resolvedPath: "E:\\\uFF12\u5E74\u751F\\Unity\\UnityLastKadai\\UnityNetExe\\NetExe\\Library\\PackageCache\\com.unity.ide.visualstudio@2.0.14"
+=======
       resolvedPath: C:\Users\ohasifu\Documents\GitHub\UnityNetExe\NetExe\Library\PackageCache\com.unity.ide.visualstudio@2.0.14
+>>>>>>> a61d0c624351e769d3ca1328ea6e084230bae206
       assetPath: Packages/com.unity.ide.visualstudio
       name: com.unity.ide.visualstudio
       displayName: Visual Studio Editor
