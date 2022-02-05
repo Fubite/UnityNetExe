@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637792038575743613
-    m_Hash: 542713064
+      ticks: 637796436179167000
+    m_Hash: 3329532473
   m_LockFileStatus:
     m_FilePath: "E:/\uFF12\u5E74\u751F/Unity/UnityLastKadai/UnityNetExe/NetExe/Packages/packages-lock.json"
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637796428708698273
-    m_Hash: 585380598
+      ticks: 637796436184861780
+    m_Hash: 3678947191
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -232,10 +232,12 @@ m_PackageAssets:
         - 1.14.4
         - 1.14.7
         - 1.14.9
+        - 1.14.12
         - 1.15.1
         - 1.15.4
         - 1.15.7
         - 1.15.9
+        - 1.15.12
         - 2.0.0-preview.6
         - 2.0.0-preview.8
         - 2.0.0-preview.15
@@ -258,6 +260,7 @@ m_PackageAssets:
         - 1.14.4
         - 1.14.7
         - 1.14.9
+        - 1.14.12
         - 2.0.0-preview.6
         - 2.0.0-preview.8
         - 2.0.0-preview.15
@@ -351,6 +354,7 @@ m_PackageAssets:
         - 3.0.7
         - 3.0.9
         - 3.0.10
+        - 3.0.12
         compatible:
         - 1.0.2
         - 1.0.6
@@ -379,6 +383,7 @@ m_PackageAssets:
         - 3.0.7
         - 3.0.9
         - 3.0.10
+        - 3.0.12
         verified: 1.2.1
       dependencies:
       - name: com.unity.test-framework
@@ -413,12 +418,12 @@ m_PackageAssets:
         url: git@github.cds.internal.unity3d.com:unity/com.unity.ide.rider.git
         revision: 009bcadf1eb16d9bbf3d00bcf6ccdde2162ce0cb
         path: 
-    - packageId: com.unity.ide.visualstudio@2.0.5
+    - packageId: com.unity.ide.visualstudio@2.0.14
       testable: 0
       isDirectDependency: 1
-      version: 2.0.5
+      version: 2.0.14
       source: 1
-      resolvedPath: "E:\\\uFF12\u5E74\u751F\\Unity\\UnityLastKadai\\UnityNetExe\\NetExe\\Library\\PackageCache\\com.unity.ide.visualstudio@2.0.5"
+      resolvedPath: "E:\\\uFF12\u5E74\u751F\\Unity\\UnityLastKadai\\UnityNetExe\\NetExe\\Library\\PackageCache\\com.unity.ide.visualstudio@2.0.14"
       assetPath: Packages/com.unity.ide.visualstudio
       name: com.unity.ide.visualstudio
       displayName: Visual Studio Editor
@@ -471,8 +476,18 @@ m_PackageAssets:
         - 2.0.12
         - 2.0.14
         verified: 2.0.14
-      dependencies: []
-      resolvedDependencies: []
+      dependencies:
+      - name: com.unity.test-framework
+        version: 1.1.9
+      resolvedDependencies:
+      - name: com.unity.test-framework
+        version: 1.1.19
+      - name: com.unity.ext.nunit
+        version: 1.0.5
+      - name: com.unity.modules.imgui
+        version: 1.0.0
+      - name: com.unity.modules.jsonserialize
+        version: 1.0.0
       keywords: []
       registry:
         id: main
@@ -486,13 +501,13 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 637400980850000000
+      datePublishedTicks: 637782923640000000
       documentationUrl: 
-      hasRepository: 1
+      hasRepository: 0
       repository:
-        type: git
-        url: https://github.cds.internal.unity3d.com/unity/com.unity.ide.visualstudio.git
-        revision: 83ca94e82bb6da515dc57e0d860b6b2224f56991
+        type: 
+        url: 
+        revision: 
         path: 
     - packageId: com.unity.ide.vscode@1.2.3
       testable: 0
@@ -1114,7 +1129,9 @@ m_PackageAssets:
         - 1.6.1
         - 1.6.2
         - 1.6.3
+        - 1.6.4
         - 1.7.0-pre.1
+        - 1.7.0-pre.2
         compatible:
         - 1.2.6
         - 1.2.7
@@ -1177,7 +1194,9 @@ m_PackageAssets:
         - 1.6.1
         - 1.6.2
         - 1.6.3
+        - 1.6.4
         - 1.7.0-pre.1
+        - 1.7.0-pre.2
         verified: 1.3.7
       dependencies: []
       resolvedDependencies: []
