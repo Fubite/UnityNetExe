@@ -1535,7 +1535,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strixBehaviours:
   - {fileID: 610441977}
-  objectType: 262145
+  objectType: 524289
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1
@@ -2330,7 +2330,7 @@ MonoBehaviour:
   strixBehaviours:
   - {fileID: 999338019}
   - {fileID: 999338021}
-  objectType: 262146
+  objectType: 524290
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1
