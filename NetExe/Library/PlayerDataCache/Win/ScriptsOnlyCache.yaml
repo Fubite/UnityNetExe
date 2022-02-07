@@ -2,14 +2,14 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - CanvasAction
-    - CharacterSkinController
     - CombatManager
     - GameManager
     - JoinAction
     - MatchingManager
-    - MovementInput
     - PlayerBase
+    - SimpleFadeManager
     - SoftGear.Strix.Unity.Runtime.StrixDebugHUD
+    - SoundManager
     - StageManager
     - StrixConnectGUI
     - StrixEnterRoom
@@ -154,9 +154,17 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 28
       Script: {instanceID: 0}
+    - Class: 43
+      Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -168,6 +176,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 11876}
     - Class: 114
       Script: {instanceID: 11908}
+    - Class: 114
+      Script: {instanceID: 11924}
     - Class: 114
       Script: {instanceID: 12008}
     - Class: 114
@@ -183,6 +193,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12392}
     - Class: 114
+      Script: {instanceID: 12478}
+    - Class: 114
       Script: {instanceID: 12608}
     - Class: 114
       Script: {instanceID: 12786}
@@ -193,9 +205,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13784}
     - Class: 114
+      Script: {instanceID: 14248}
+    - Class: 114
       Script: {instanceID: 14548}
     - Class: 114
       Script: {instanceID: 14632}
+    - Class: 114
+      Script: {instanceID: 14698}
     - Class: 114
       Script: {instanceID: 14704}
     - Class: 114
@@ -203,10 +219,16 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14708}
     - Class: 114
+      Script: {instanceID: 14710}
+    - Class: 114
       Script: {instanceID: 14738}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
+      Script: {instanceID: 0}
+    - Class: 136
+      Script: {instanceID: 0}
+    - Class: 137
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -255,6 +277,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 12448}
     - Class: 114
       Script: {instanceID: 12786}
+    - Class: 114
+      Script: {instanceID: 13538}
+    - Class: 114
+      Script: {instanceID: 14438}
     - Class: 114
       Script: {instanceID: 14708}
     - Class: 114

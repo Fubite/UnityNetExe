@@ -162,7 +162,7 @@ public class MatchingManager : StrixBehaviour
     [StrixRpc]
     void StartGame()
     {
-        SceneManager.LoadScene("Main");
+        SimpleFadeManager.Instance.FadeSceneChange("Main");
     }
 
 }

@@ -42,7 +42,7 @@ public class TitleManager : MonoBehaviour
             switch(selectButton)
             {
                 case BUTTONS.TITLE:
-                    SceneManager.LoadScene("Matching");
+                    SimpleFadeManager.Instance.FadeSceneChange("Matching");
                     break;
                 case BUTTONS.RULE:
                     break;

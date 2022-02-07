@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
     public void ChangeScene()
     {
         StrixNetwork.instance.DisconnectMasterServer(); //サーバー切断
-        SceneManager.LoadScene("Title");
+        SimpleFadeManager.Instance.FadeSceneChange("Title");
     }
 
 
