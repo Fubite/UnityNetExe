@@ -9,7 +9,7 @@ public class TitleManager : MonoBehaviour
     enum BUTTONS
     { 
         TITLE,
-        RULE,
+        //RULE,
         QUIT
     }
 
@@ -49,8 +49,8 @@ public class TitleManager : MonoBehaviour
                     SimpleFadeManager.Instance.FadeSceneChange("Matching");
                     SoundManager.Instance.SePlayer.Play("Decesion");
                     break;
-                case BUTTONS.RULE:
-                    break;
+                //case BUTTONS.RULE:
+                    //break;
                 case BUTTONS.QUIT:
                     Application.Quit();
                     break;
@@ -66,13 +66,13 @@ public class TitleManager : MonoBehaviour
             if (elapsed <= 0)
             {
                 elapsed = interval;
-                SoundManager.Instance.SePlayer.Play("Select");
 
                 if (v >= 0.2f)
                 {
                     if (selectButton > BUTTONS.TITLE)
                     {
                         SelectButton(selectButton - 1);
+                        SoundManager.Instance.SePlayer.Play("Select");
                     }
                 }
                 else
@@ -80,6 +80,7 @@ public class TitleManager : MonoBehaviour
                     if (selectButton < BUTTONS.QUIT)
                     {
                         SelectButton(selectButton + 1);
+                        SoundManager.Instance.SePlayer.Play("Select");
                     }
                 }
             }
