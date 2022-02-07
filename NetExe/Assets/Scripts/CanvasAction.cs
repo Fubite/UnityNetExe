@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class CanvasAction : MonoBehaviour
 {
-    PlayerBase myPlayer;
+    CombatManager myPlayer;
 
     [SerializeField]
     Text txtHP;
@@ -12,7 +12,7 @@ public class CanvasAction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        myPlayer = transform.parent.gameObject.GetComponent<PlayerBase>();
+        myPlayer = transform.parent.gameObject.GetComponent<CombatManager>();
     }
 
     // Update is called once per frame
@@ -20,7 +20,7 @@ public class CanvasAction : MonoBehaviour
     {
         if (!myPlayer) return;
 
-        txtHP.text = myPlayer.CurrentHP.ToString("f0");
+        txtHP.text = myPlayer.currentHP.ToString("f0");
 
         transform.forward = Camera.main.transform.forward;
     }

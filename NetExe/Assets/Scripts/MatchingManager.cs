@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using SoftGear.Strix.Unity.Runtime; //Strixの利用に必要
+using SoftGear.Strix.Client.Match.Room.Model;
 
 public class MatchingManager : StrixBehaviour
 { 
@@ -13,9 +14,9 @@ public class MatchingManager : StrixBehaviour
     bool sel;
     float elapsed = 0f;
     [SerializeField]
-    public Image p1Frame = null;
+    public Text p1Name = null;
     [SerializeField]
-    public Image p2Frame = null;
+    public Text p2Name = null;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,7 @@ public class MatchingManager : StrixBehaviour
     // Update is called once per frame
     void Update()
     {
-        //RpcToAll("SetName");
+
         elapsed += Time.deltaTime;
         selOutline.effectColor = new Color(0,0,0,elapsed > 1 ? 2 - elapsed : elapsed);
         if(elapsed > 2f)
@@ -71,38 +72,75 @@ public class MatchingManager : StrixBehaviour
             }
             else
             {
-                //ExitRoom();
+                StrixNetwork.instance.DisconnectMasterServer(); //サーバー切断
                 SceneManager.LoadScene("Title");
             }
         }
     }
 
-    //public void JoinRoom()
-    //{
-    //    if (StrixNetwork.instance.isRoomOwner)
-    //    {
-    //        p1Name = StrixNetwork.instance.selfRoomMember.GetName();
-    //    }
-    //    else
-    //    {
-    //        p2Name = StrixNetwork.instance.selfRoomMember.GetName();
-    //    }
-    //    RpcToAll("SetName");
-    //}
+    [StrixRpc]
+    void SetPlayerData()
+    {
+        Debug.Log("セット呼ばれた");
+        if (StrixNetwork.instance.isRoomOwner)
+        {
+            p1Name.text = "(Owner)" + StrixNetwork.instance.playerName;
 
-    //public void ExitRoom()
-    //{
-    //    if (StrixNetwork.instance.isRoomOwner)
-    //    {
-    //        p1Name = p2Name;
-    //        p2Name = "Non Player";
-    //    }
-    //    else
-    //    {
-    //        p2Name = "Non Player";
-    //    }
-    //    RpcToAll("SetName");
-    //}
+            StrixNetwork strixNetwork = StrixNetwork.instance;
+            IList<CustomizableMatchRoomMember> roomMembers = StrixNetwork.instance.sortedRoomMembers;
+            foreach (var member in roomMembers)
+            {
+                if (member.GetPrimaryKey() != strixNetwork.selfRoomMember.GetPrimaryKey())
+                {
+                    p2Name.text = member.GetName();
+                }
+            }
+        }
+        else
+        {
+            StrixNetwork strixNetwork = StrixNetwork.instance;
+            IList<CustomizableMatchRoomMember> roomMembers = strixNetwork.sortedRoomMembers;
+            foreach (var member in roomMembers)
+            {
+                if (member.GetPrimaryKey() != strixNetwork.selfRoomMember.GetPrimaryKey())
+                {
+                    p1Name.text = "(Owner)" + member.GetName();
+                }
+            }
+            p2Name.text = StrixNetwork.instance.playerName;
+        }
+    }
+
+
+
+    [StrixRpc]
+    void DeletePlayerData()
+    {
+        if (isLocal)
+        {
+            if (StrixNetwork.instance.isRoomOwner)
+            {
+                p1Name.text = p2Name.text;
+                p2Name.text = "";
+            }
+            else
+            {
+                p2Name.text = "";
+            }
+        }
+        else
+        {
+            if (!StrixNetwork.instance.isRoomOwner)
+            {
+                p2Name.text = "";
+            }
+            else
+            {
+                p1Name.text = p2Name.text;
+                p2Name.text = "";
+            }
+        }
+    }
 
     [StrixRpc]
     void SelButton(bool _sel)

@@ -3,6 +3,7 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - CanvasAction
     - CharacterSkinController
+    - CombatManager
     - GameManager
     - JoinAction
     - MatchingManager
@@ -16,7 +17,6 @@ ScriptsOnlyBuild:
     - UVScroll
     StrixUnityRuntime.dll:
     - SoftGear.Strix.Unity.Runtime.StrixAnimationSynchronizer
-    - SoftGear.Strix.Unity.Runtime.StrixMovementSynchronizer
     - SoftGear.Strix.Unity.Runtime.StrixReplicator
     - SoftGear.Strix.Unity.Runtime.StrixReplicatorSettings
     - SoftGear.Strix.Unity.Runtime.StrixSceneInfo
@@ -84,8 +84,6 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11876}
-    - Class: 114
       Script: {instanceID: 11908}
     - Class: 114
       Script: {instanceID: 11924}
@@ -100,31 +98,33 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12392}
     - Class: 114
+      Script: {instanceID: 12478}
+    - Class: 114
       Script: {instanceID: 12622}
     - Class: 114
       Script: {instanceID: 12786}
     - Class: 114
       Script: {instanceID: 13314}
     - Class: 114
-      Script: {instanceID: 13606}
+      Script: {instanceID: 13610}
     - Class: 114
-      Script: {instanceID: 13780}
+      Script: {instanceID: 13784}
     - Class: 114
-      Script: {instanceID: 14244}
+      Script: {instanceID: 14248}
     - Class: 114
-      Script: {instanceID: 14504}
+      Script: {instanceID: 14510}
     - Class: 114
-      Script: {instanceID: 14626}
-    - Class: 114
-      Script: {instanceID: 14692}
+      Script: {instanceID: 14632}
     - Class: 114
       Script: {instanceID: 14698}
     - Class: 114
-      Script: {instanceID: 14702}
-    - Class: 114
       Script: {instanceID: 14704}
     - Class: 114
-      Script: {instanceID: 14732}
+      Script: {instanceID: 14708}
+    - Class: 114
+      Script: {instanceID: 14710}
+    - Class: 114
+      Script: {instanceID: 14738}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -187,25 +187,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12786}
     - Class: 114
-      Script: {instanceID: 13606}
+      Script: {instanceID: 13610}
     - Class: 114
-      Script: {instanceID: 13746}
+      Script: {instanceID: 13750}
     - Class: 114
-      Script: {instanceID: 13780}
+      Script: {instanceID: 13784}
     - Class: 114
-      Script: {instanceID: 14542}
+      Script: {instanceID: 14548}
     - Class: 114
-      Script: {instanceID: 14626}
+      Script: {instanceID: 14632}
     - Class: 114
-      Script: {instanceID: 14696}
+      Script: {instanceID: 14704}
     - Class: 114
-      Script: {instanceID: 14698}
+      Script: {instanceID: 14706}
     - Class: 114
-      Script: {instanceID: 14700}
+      Script: {instanceID: 14708}
     - Class: 114
-      Script: {instanceID: 14702}
-    - Class: 114
-      Script: {instanceID: 14732}
+      Script: {instanceID: 14738}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -235,7 +233,13 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -246,24 +250,22 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11908}
     - Class: 114
-      Script: {instanceID: 12160}
-    - Class: 114
       Script: {instanceID: 12210}
     - Class: 114
       Script: {instanceID: 12448}
     - Class: 114
       Script: {instanceID: 12786}
     - Class: 114
-      Script: {instanceID: 14702}
+      Script: {instanceID: 14708}
     - Class: 114
-      Script: {instanceID: 14732}
+      Script: {instanceID: 14738}
     - Class: 115
-      Script: {instanceID: 0}
-    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
       Script: {instanceID: 0}
     - Class: 222
       Script: {instanceID: 0}
@@ -532,7 +534,7 @@ ScriptsOnlyBuild:
     className: Vignette
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 200c75c28d0dc560c164034d2e812d57
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TitleManager
@@ -544,7 +546,7 @@ ScriptsOnlyBuild:
     className: AnimationTrack
   - hash:
       serializedVersion: 2
-      Hash: c9128804da2760699b977e6e3f600d62
+      Hash: 46b77cf5b6767046905ff6a2e039f6e3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CombatManager
@@ -802,6 +804,12 @@ ScriptsOnlyBuild:
     className: RecorderBindings
   - hash:
       serializedVersion: 2
+      Hash: 234d929f3844e95468175ce81c108dcc
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SimpleFadeManager
+  - hash:
+      serializedVersion: 2
       Hash: 3164bc883ff663a5cdb32d1ef7e7c0c5
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -958,7 +966,7 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
-      Hash: 6eddaa5437576f3006276e8dbe957826
+      Hash: 087569a2067b607e72e21741a0ec0ce8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerBase
@@ -982,6 +990,12 @@ ScriptsOnlyBuild:
     className: MarkerTrack
   - hash:
       serializedVersion: 2
+      Hash: d32134973221c5798bd8f161cea8d63d
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SoundManager
+  - hash:
+      serializedVersion: 2
       Hash: d791aa6007fa3640be1164ea75bb087d
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -994,7 +1008,7 @@ ScriptsOnlyBuild:
     className: StageManager
   - hash:
       serializedVersion: 2
-      Hash: 55302b817ef84d0a007b452114f6bde1
+      Hash: c74eb7473560fe1df2c93f12a7c931ec
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MatchingManager

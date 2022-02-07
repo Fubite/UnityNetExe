@@ -910,7 +910,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114090108785688568, guid: 6e9eb2d8a1f1618449e8c178d1e6b0a7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6e9eb2d8a1f1618449e8c178d1e6b0a7, type: 3}
 --- !u!1 &271801691
 GameObject:
@@ -1438,7 +1439,7 @@ MonoBehaviour:
   - {fileID: 610441977}
   objectType: 524289
   sendRate: 5
-  syncDestroy: 1
+  syncDestroy: 0
   networkInstanceId: -1
   InstantiableBy: 0
   ConnectionClosedBehaviour: 0
@@ -1551,8 +1552,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e429e8c095e6c740b7feec068cf4f43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
-  currentHP: 0
   team: 0
   teamTex:
   - {fileID: 2800000, guid: fb6e06c953f0d8045bc58e0f5a640f07, type: 3}
@@ -1575,8 +1574,9 @@ MonoBehaviour:
   - {fileID: 787790136}
   - {fileID: 787790138}
   - {fileID: 787790139}
+  - {fileID: 787790143}
   objectType: 524290
-  sendRate: 5
+  sendRate: 10
   syncDestroy: 1
   networkInstanceId: -1
   InstantiableBy: 1
@@ -1610,8 +1610,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncPosition: 1
   syncRotation: 1
-  syncVelocity: 1
-  syncAngularVelocity: 1
+  syncVelocity: 0
+  syncAngularVelocity: 0
 --- !u!4 &787790140 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 539745478100655087, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
@@ -1636,6 +1636,20 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 7635726066119915157, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
   m_PrefabInstance: {fileID: 961012767}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &787790143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787790135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83b5674311fce334183630f8e3fc8347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 100
+  currentHP: 100
 --- !u!1 &832529523
 GameObject:
   m_ObjectHideFlags: 0
@@ -2170,7 +2184,7 @@ PrefabInstance:
     - target: {fileID: 7635726066119915157, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: b1079918efd6b3f4799e0cdc1fc2d156, type: 2}
+      objectReference: {fileID: 9100000, guid: 9946c1bba09cf594690bc34fbfff9c29, type: 2}
     m_RemovedComponents:
     - {fileID: 4757836856755875626, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
     - {fileID: 4757836856755875627, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
@@ -2409,11 +2423,10 @@ MonoBehaviour:
   m_Script: {fileID: 1308000454, guid: f2c2112f638c5b8489d16403d930373b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strixBehaviours:
-  - {fileID: 1164636182}
+  strixBehaviours: []
   objectType: 524291
   sendRate: 5
-  syncDestroy: 1
+  syncDestroy: 0
   networkInstanceId: -1
   InstantiableBy: 0
   ConnectionClosedBehaviour: 1

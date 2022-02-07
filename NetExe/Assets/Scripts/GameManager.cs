@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using SoftGear.Strix.Unity.Runtime;
 
-public class GameManager : StrixBehaviour
+public class GameManager : MonoBehaviour
 {
     enum GameState
     {
@@ -13,11 +13,9 @@ public class GameManager : StrixBehaviour
         Game,
         Finish,
     }
-    [StrixSyncField]
     GameState state;
-
+    
     //ゲーム上のプレイヤー
-    [StrixSyncField]
     PlayerBase[] player;
 
     //UI関連
@@ -37,17 +35,12 @@ public class GameManager : StrixBehaviour
     }
 
     //プレイヤーをセットする
-    [StrixRpc]
     public void SetPlayer(PlayerBase _playey)
     {
-        Debug.Log("Set!");
-        Debug.Log(_playey.Team.ToString());
-        Debug.Log(_playey.gameObject.name);
         player[(int)_playey.Team] = _playey;
     }
 
     //プレイヤー全員にゲーム開始合図
-    [StrixRpc]
     public void GameStart()
     {
         Debug.Log("Start!");
@@ -58,22 +51,20 @@ public class GameManager : StrixBehaviour
     }
 
     //プレイヤー全員にゲーム終了合図
-    [StrixRpc]
     public void GameEnd()
     {
         Debug.Log("End");
         for (int i = 0; i < player.Length; ++i)
         {
-            player[i].RpcToAll("SetMove", false);
+            player[i].SetMove(false);
         }
     }
     
     //タイトルへ
-    [StrixRpc]
     public void ChangeScene()
     {
-        Debug.Log("Change!");
-        SceneManager.LoadScene("Matching");
+        StrixNetwork.instance.DisconnectMasterServer(); //サーバー切断
+        SceneManager.LoadScene("Title");
     }
 
 
@@ -83,8 +74,7 @@ public class GameManager : StrixBehaviour
         naviTxt.text = "Redey?";
         yield return new WaitForSeconds(1.5f);
         naviTxt.text = "Go!";
-        RpcToAll("GameStart");
-        //GameStart();
+        GameStart();
         yield return new WaitForSeconds(1);
         naviTxt.text = "";
         yield break;
@@ -94,11 +84,11 @@ public class GameManager : StrixBehaviour
     IEnumerator Finish()
     {
         naviTxt.text = "Finish!";
-        RpcToAll("GameEnd");
+        GameEnd();
         yield return new WaitForSeconds(1.5f);
         naviTxt.text = (player[1].isDead ? "Red" : "Blue") + " Win!";
         yield return new WaitForSeconds(2f);
-        RpcToAll("ChangeScene");
+        ChangeScene();
         yield break;
     }
 
@@ -119,8 +109,7 @@ public class GameManager : StrixBehaviour
             case GameState.Game:
                 if (player[0].isDead || player[1].isDead)
                 {
-                    //赤勝利
-                    StartCoroutine(Finish());
+                    StartCoroutine(Finish());   //終了処理を動かす
                     state = GameState.Finish;
                 }
                 break;

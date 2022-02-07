@@ -4,19 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using SoftGear.Strix.Unity.Runtime; //Strixの利用に必要
 
-public class PlayerBase : StrixBehaviour,IDamage
+public class PlayerBase : StrixBehaviour, ICombat
 {
     [SerializeField]
-    int maxHP = 100;
-    [StrixSyncField,SerializeField]
-    int currentHP = 0;
-    public int CurrentHP => currentHP;
-
-    [StrixSyncField, SerializeField]
     PanelData.TeamColor team;   //自身のチーム
     public PanelData.TeamColor Team { get { return team; } }
+
     [SerializeField]
     Texture[] teamTex = new Texture[2];    //チームの色のテクスチャ 
+    SkinnedMeshRenderer[] myRenderer;   //自身のメッシュレンダラー
 
     int posX = 0;   //現在のステージ上のX座標
     int posY = 0;   //現在のステージ上のY座標
@@ -25,70 +21,78 @@ public class PlayerBase : StrixBehaviour,IDamage
     bool isNeutralX = true; //ニュートラルに戻ったか確認用
     bool isNeutralY = true;
 
+    bool isReady = false;
     public bool isMove = false;    //移動可否フラグ
-    [StrixSyncField]
     public bool isDead = false;    //死亡フラグ
 
-    Text hpTxt;
+
     StageManager stageManager;  //ステージマネージャー
     GameManager gameManager;    //ゲームマネージャー
-    Animator myAnim;
-
-    void Awake()
-    {
-        myAnim = GetComponent<Animator>();
-
-    }
 
     // Start is called before the first frame update
     void Start()
     {
+        isReady = false;
+        myRenderer = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         stageManager = GameObject.FindGameObjectWithTag("Stage").GetComponent<StageManager>();
-        hpTxt = GetComponentInChildren<Text>();
-        SkinnedMeshRenderer[] myRenderer;
-        myRenderer = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
-        Debug.Log("２回だけのはず");
-        if (StrixNetwork.instance.isRoomOwner)
-        {
-            team = PanelData.TeamColor.Blue;
-        }
-        else
-        {
-            team = PanelData.TeamColor.Red;
-        }
-        for (int i = 0; i < myRenderer.Length; ++i)
-        {
-            myRenderer[i].material.mainTexture = teamTex[(int)team];
-        }
-        Invoke("Ready", 0.5f);
     }
 
     //ゲーム開始前処理
     void Ready()
     {
-        currentHP = maxHP;
-        hpTxt.text = currentHP.ToString();
+        if (isLocal)
+        {
+            if (StrixNetwork.instance.isRoomOwner)
+            {
+                team = PanelData.TeamColor.Blue;
+            }
+            else
+            {
+                team = PanelData.TeamColor.Red;
+            }
+            for (int i = 0; i < myRenderer.Length; ++i)
+            {
+                myRenderer[i].material.mainTexture = teamTex[(int)team];
+            }
+        }
+        else
+        {
+            if(StrixNetwork.instance.isRoomOwner)
+            {
+                team = PanelData.TeamColor.Red;
+            }
+            else 
+            {
+                team = PanelData.TeamColor.Blue;
+            }
+            for (int i = 0; i < myRenderer.Length; ++i)
+            {
+                myRenderer[i].material.mainTexture = teamTex[(int)team];
+            }
+        }
         //初期位置を決定
         posY = 1;
         if (team == PanelData.TeamColor.Blue)
         {
             posX = 1;
-            hpTxt.canvas.transform.localRotation = Quaternion.Euler(0, -90, 0);
             transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
         }
         else if(team == PanelData.TeamColor.Red)
         {
             posX = 4;
-            hpTxt.canvas.transform.localRotation = Quaternion.Euler(0, 90, 0);
             transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
         }
+        Debug.Log(stageManager);
+        Debug.Log(transform.position);
         //ステージデータに自身の位置をセット
         stageManager.PanelDatas[posY, posX].onChara = gameObject;
         transform.position = stageManager.PanelDatas[posY, posX].panelObj.transform.position + new Vector3(0, 0.5f, 0);
 
         //プレイヤーの準備が完了したらマネージャーに自身をセット
-        gameManager.RpcToAll("SetPlayer", this);
+        //gameManager.RpcToAll("SetPlayer", this);
+        gameManager.SetPlayer(this);
+        isReady = true; //準備完了！
     }
 
     //上下左右へ移動時の処理
@@ -116,25 +120,16 @@ public class PlayerBase : StrixBehaviour,IDamage
         return true;
     }
 
-    [StrixRpc]
     public void SetMove(bool value)
     {
         Debug.Log("SetMove!" + value);
         isMove = value;
     }
 
-    [StrixRpc] 
-    public void Damage(int value)
+    public void Dead()
     {
-        Debug.Log("hit!");
-        currentHP -= value;
-        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
-        hpTxt.text = currentHP.ToString();
-        if(currentHP <= 0)
-        {
-            isDead = true;
-            myAnim.SetTrigger("Dead");
-        }
+        Debug.Log("Dead!");
+        isDead = true;
     }
 
     void Shot(int atk)
@@ -142,15 +137,14 @@ public class PlayerBase : StrixBehaviour,IDamage
         RaycastHit hit;
         if (Physics.Raycast(transform.position + transform.forward, transform.forward, out hit))
         {
-            PlayerBase idm = hit.collider.gameObject.GetComponent<PlayerBase>();
-            Debug.Log("あたってはいる");
-            if (idm != null)// && idm.isLocal)
+            Debug.Log("当たってはいる");
+            CombatManager idm = hit.collider.gameObject.GetComponent<CombatManager>();
+            Debug.Log(idm);
+            if (idm != null && !idm.isLocal)
             {
-                //idm.Damage(atk);
-                idm.RpcToAll("Damage", atk);
-                Debug.Log("Damage!");
+                Debug.Log("Damageが呼ばれるはず");
+                idm.RpcToAll("Damage", atk); //RpcToRoomOwner
             }
-
         }
     }
 
@@ -165,6 +159,10 @@ public class PlayerBase : StrixBehaviour,IDamage
     // Update is called once per frame
     void Update()
     {
+        if(!isReady && StrixNetwork.instance.roomSession.IsConnected)
+        {
+            Ready();    //準備完了でなくて接続完了しているなら
+        }
         if (!isLocal || !isMove)
         {
             return;

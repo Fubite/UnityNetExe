@@ -1,9 +1,5 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/Scenes/Matching.unity
-=======
-- path: Assets/Scenes/Title.unity
->>>>>>> 0e387e51b5ca42450ae4d00a57329b84e5066720
   isLoaded: 1
   isActive: 1
   isSubScene: 0

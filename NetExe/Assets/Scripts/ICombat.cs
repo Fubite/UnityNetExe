@@ -1,0 +1,5 @@
+﻿
+interface ICombat
+{
+    void Dead();
+}
