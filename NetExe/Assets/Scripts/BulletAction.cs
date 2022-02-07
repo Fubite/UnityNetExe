@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class BulletAction : MonoBehaviour
 {
-    float flyLength;    //飛翔距離
-    float sumLength;    //飛翔距離の合計
-    float speed = 10;
-    Vector3 dir;
-    public BulletAction(float _flyLength, Vector3 _dir)
+    float flyLength = float.MaxValue;    //飛翔距離
+    public float FlyLength
     {
-        flyLength = _flyLength;
+        set { flyLength = value; }
+    }
+
+    float sumLength;    //飛翔距離の合計
+    float speed = 10f;
+    Vector3 dir;
+    public Vector3 Dir
+    {
+        set { dir = value; }
+    }
+    void Start()
+    {
         sumLength = 0;
-        dir = _dir;
     }
 
     // Update is called once per frame

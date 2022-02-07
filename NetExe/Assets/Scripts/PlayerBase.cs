@@ -7,6 +7,11 @@ using SoftGear.Strix.Unity.Runtime; //Strixの利用に必要
 public class PlayerBase : StrixBehaviour, ICombat
 {
     [SerializeField]
+    GameObject bulletPrefab;
+    [SerializeField]
+    float shotinterval = 0.1f;
+    float interval = 0.1f;
+    [SerializeField]
     PanelData.TeamColor team;   //自身のチーム
     public PanelData.TeamColor Team { get { return team; } }
 
@@ -134,12 +139,16 @@ public class PlayerBase : StrixBehaviour, ICombat
 
     void Shot(int atk)
     {
+        interval = 0f;
+        GameObject bullet = Instantiate(bulletPrefab, transform.position + new Vector3(0,0.5f,0), transform.rotation);
+        BulletAction b_act = bullet.GetComponent<BulletAction>();
+        Destroy(bullet, 12.0f);
         RaycastHit hit;
         if (Physics.Raycast(transform.position + transform.forward, transform.forward, out hit))
         {
-            Debug.Log("当たってはいる");
+            b_act.FlyLength = Vector3.Distance(hit.transform.position, transform.position);
+            b_act.Dir = hit.transform.position - transform.position;
             CombatManager idm = hit.collider.gameObject.GetComponent<CombatManager>();
-            Debug.Log(idm);
             if (idm != null && !idm.isLocal)
             {
                 Debug.Log("Damageが呼ばれるはず");
@@ -212,10 +221,9 @@ public class PlayerBase : StrixBehaviour, ICombat
         {
             isNeutralY = true;
         }
-
-        if(Input.GetButtonDown("Fire1"))
+        interval += Time.deltaTime;
+        if(Input.GetButtonDown("Fire1") && interval > shotinterval)
         {
-            Debug.Log("shot");
             Shot(5);
         }
     }
