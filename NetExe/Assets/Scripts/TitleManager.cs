@@ -25,6 +25,8 @@ public class TitleManager : MonoBehaviour
     void Start()
     {
         SelectButton(BUTTONS.TITLE);
+
+        SoundManager.Instance.BgmPlayer.Play("Title");
     }
 
     void SelectButton(BUTTONS _selectButton)

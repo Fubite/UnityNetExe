@@ -45,7 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3326c2ad7ba198243a3d793cda474afd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmData: []
+  bgmData:
+  - name: Title
+    clip: {fileID: 8300000, guid: 14970921d4eaa5d44b0e1f140a76447f, type: 3}
+  - name: Matching
+    clip: {fileID: 8300000, guid: 659ab9e592bf36f4a81e096b1575a83a, type: 3}
+  - name: Battle
+    clip: {fileID: 8300000, guid: c1e05d8b8f5fdca4e8dd3cf3c7b77202, type: 3}
   seData: []
   mainVolume: 1
   bgmVolume: 1

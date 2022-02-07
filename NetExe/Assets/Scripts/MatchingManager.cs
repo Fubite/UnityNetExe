@@ -27,6 +27,7 @@ public class MatchingManager : StrixBehaviour
             startBtn.color = new Color(1, 1, 1, 0.5f);
         if (exitBtn)
             selOutline = exitBtn.gameObject.GetComponent<Outline>();
+        SoundManager.Instance.BgmPlayer.Play("Mathcing");
     }
 
     // Update is called once per frame
