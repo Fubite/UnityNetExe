@@ -177,6 +177,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
         }
         AudioSource bgmSource = gameObject.AddComponent<AudioSource>(); //BGM用オーディオソース作成
         AudioSource seSource = gameObject.AddComponent<AudioSource>();  //SE用オーディオソース作成
+        bgmSource.loop = true;
         bgmPlayer = new BGMPlayer(bgmSource, bgmData, mainVolume * bgmVolume);
         sePlayer = new SEPlayer(seSource, seData, mainVolume * seVolume);
     }

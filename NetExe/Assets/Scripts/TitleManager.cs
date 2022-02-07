@@ -25,6 +25,10 @@ public class TitleManager : MonoBehaviour
     void Start()
     {
         SelectButton(BUTTONS.TITLE);
+
+        SoundManager.Instance.BgmPlayer.Play("Title");
+        SoundManager.Instance.BgmPlayer.Volume = 0.5f;
+        
     }
 
     void SelectButton(BUTTONS _selectButton)
@@ -43,6 +47,7 @@ public class TitleManager : MonoBehaviour
             {
                 case BUTTONS.TITLE:
                     SimpleFadeManager.Instance.FadeSceneChange("Matching");
+                    SoundManager.Instance.SePlayer.Play("Decesion");
                     break;
                 case BUTTONS.RULE:
                     break;
@@ -61,6 +66,7 @@ public class TitleManager : MonoBehaviour
             if (elapsed <= 0)
             {
                 elapsed = interval;
+                SoundManager.Instance.SePlayer.Play("Select");
 
                 if (v >= 0.2f)
                 {
